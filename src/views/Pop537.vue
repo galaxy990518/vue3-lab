@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-[calc(100dvh)] bg-gray-700 flex items-center justify-center overflow-hidden select-none"
+    class="min-h-[calc(100dvh)] bg-gray-700 flex items-center justify-center overflow-hidden select-none"
   >
     <div class="text-center">
       <h1 class="text-6xl font-bold text-white mb-4">USAGI</h1>

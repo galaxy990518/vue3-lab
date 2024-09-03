@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 overflow-y-auto">
+  <div class="min-h-[calc(100dvh)] bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 overflow-y-auto">
     <div class="max-w-2xl mx-auto">
       <h1 class="text-3xl font-extrabold text-gray-100 text-center mb-10">
         Infinite Scroll with Random Posts using Intersection Observer
@@ -137,5 +137,4 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

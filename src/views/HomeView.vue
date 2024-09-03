@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-[calc(100dvh)] bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-3xl mx-auto">
       <h1 class="text-4xl font-extrabold text-gray-100 text-center mb-8">
         <span class="flex items-center justify-center">
