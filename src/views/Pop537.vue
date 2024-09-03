@@ -17,7 +17,7 @@
         <img
           :src="usagiImage"
           alt="Usagi"
-          class="w-80 h-80 cursor-pointer mx-auto select-none"
+          class="w-48 h-48 md:w-80 md:h-80 cursor-pointer mx-auto select-none"
           @click="incrementScore"
           @keydown="incrementScore"
           tabindex="0"
@@ -111,9 +111,6 @@ const playSpecialSound = () => {
   isAudioPlaying.value = true;
   specialSound.currentTime = 0;
   specialSound.play();
-
-  const animationDuration = specialSound.duration;
-  document.documentElement.style.setProperty('--animation-duration', `${animationDuration}s`);
 
   specialSound.onended = () => {
     isAudioPlaying.value = false;
