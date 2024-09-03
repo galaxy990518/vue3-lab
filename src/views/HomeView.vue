@@ -105,6 +105,10 @@ const exerciseList = ref([
   {
     name: 'InfiniteScroll',
     desc: 'Infinite Scrolling with Random Posts'
+  },
+  {
+    name: 'Pop537',
+    desc: 'Popusagi game inspired by the Popcat game'
   }
 ]);
 </script>
