@@ -37,7 +37,7 @@
           <div
             v-if="showTextStates[index]"
             class="absolute text-white text-4xl font-bold select-none"
-            :class="meowPositionClass(index)"
+            :class="textPositionClass(index)"
           >
             {{ text }}
           </div>
@@ -58,6 +58,17 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useSound } from '@vueuse/sound';
+import wu from '@/assets/sounds/pop537/wu.mp3';
+import ya from '@/assets/sounds/pop537/ya.mp3';
+import yee from '@/assets/sounds/pop537/yee.mp3';
+import ha from '@/assets/sounds/pop537/ha.mp3';
+import plur from '@/assets/sounds/pop537/plur.mp3';
+
+const wuSound = useSound(wu);
+const yaSound = useSound(ya);
+const yeeSound = useSound(yee);
+const haSound = useSound(ha);
 
 const score = ref(0);
 const isMouthOpen = ref(false);
@@ -75,7 +86,7 @@ const usagiImage = computed(() =>
     : new URL('@/assets/images/pop537/usagi-closed.png', import.meta.url).href
 );
 
-const meowPositionClass = (index) => {
+const textPositionClass = (index) => {
   const positions = [
     '-left-16 top-0',
     '-right-16 top-0',
@@ -85,14 +96,13 @@ const meowPositionClass = (index) => {
   return positions[index];
 };
 
-const sounds = [
-  new Audio(new URL('@/assets/sounds/pop537/wu.mp3', import.meta.url).href),
-  new Audio(new URL('@/assets/sounds/pop537/ya.mp3', import.meta.url).href),
-  new Audio(new URL('@/assets/sounds/pop537/yee.mp3', import.meta.url).href),
-  new Audio(new URL('@/assets/sounds/pop537/ha.mp3', import.meta.url).href)
-];
-
-const specialSound = new Audio(new URL('@/assets/sounds/pop537/plur.mp3', import.meta.url).href);
+const sounds = [wuSound, yaSound, yeeSound, haSound];
+const specialSound = useSound(plur, {
+  onend: () => {
+    isAudioPlaying.value = false;
+    showSpecialText.value = false;
+  }
+});
 
 onMounted(() => {
   window.addEventListener('keydown', incrementScore);
@@ -102,20 +112,9 @@ onUnmounted(() => {
   window.removeEventListener('keydown', incrementScore);
 });
 
-const playSound = (index) => {
-  sounds[index].currentTime = 0;
-  sounds[index].play();
-};
-
 const playSpecialSound = () => {
   isAudioPlaying.value = true;
-  specialSound.currentTime = 0;
   specialSound.play();
-
-  specialSound.onended = () => {
-    isAudioPlaying.value = false;
-    showSpecialText.value = false;
-  };
 };
 
 const showTextAnimation = (index) => {
@@ -140,7 +139,7 @@ const incrementScore = () => {
   score.value++;
   isMouthOpen.value = true;
 
-  playSound(currentTextIndex.value);
+  sounds[currentTextIndex.value].play();
   showTextAnimation(currentTextIndex.value);
   wobbleScore();
 
@@ -174,5 +173,9 @@ const incrementScore = () => {
   white-space: nowrap;
   transform: translate(100%, -50%);
   animation: moveLeft 1.2s linear forwards;
+}
+
+* {
+  touch-action: manipulation;
 }
 </style>
